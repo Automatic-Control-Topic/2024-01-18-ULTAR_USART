@@ -19,16 +19,16 @@ void __interrupt(low_priority) LowISR(void)
 	if(RX_TEMP=='p')	FLAGbits.TxD=1;	// 'p'則停止傳送
     if(RX_TEMP=='a')	test = 1;	
     if(RX_TEMP=='b')	test = 0;	
-//    if (PIR2bits.CCP2IF) {
-//        PIE2bits.CCP2IE = 0;
-//        // 在這裡處理 CCP2 捕捉事件
-//        // 清除 CCP2 中斷標誌
-//        while(PIR1bits.TX1IF==0); // 等待傳輸完成，緩衝器可輸入
-//            TXREG1 = 0x31;	// 傳出數值
-//        PIE2bits.CCP2IE = 1;
-//        PIR2bits.CCP2IF = 0;
-//        LATD += 1;
-//    }
+    if (PIR2bits.CCP2IF == 1) {
+        PIE2bits.CCP2IE = 0;
+        // 在這裡處理 CCP2 捕捉事件
+        // 清除 CCP2 中斷標誌
+        while(PIR1bits.TX1IF==0); // 等待傳輸完成，緩衝器可輸入
+            TXREG1 = 0x31;	// 傳出數值
+        PIE2bits.CCP2IE = 1;
+        PIR2bits.CCP2IF = 0;
+        LATD += 1;
+    }
     LATD = (LATD & 0b01111111) | 00000000;
 }
 
@@ -36,14 +36,22 @@ void __interrupt(low_priority) LowISR(void)
 // TIMER1
 void __interrupt() HighISR(void)
 {
-    while(PIR1bits.TX1IF==0); // 等待傳輸完成，緩衝器可輸入
-            TXREG1 = 0x32;
     LATD = (LATD & 0b10111111) | 01000000;
 	PIR1bits.TMR1IF = 0;		// 清除中斷旗標
 	TMR1H=0x80;		// 寫入計時預設值0x8000
     TMR1L=0x00;
 	FLAGbits.One_S=1;			// 設定整秒旗標以利正常程式更新資料
     LATD = (LATD & 0b10111111) | 00000000;
+    if (PIR2bits.CCP2IF) {
+        PIE2bits.CCP2IE = 0;
+        // 在這裡處理 CCP2 捕捉事件
+        // 清除 CCP2 中斷標誌
+        while(PIR1bits.TX1IF==0); // 等待傳輸完成，緩衝器可輸入
+            TXREG1 = 0x31;	// 傳出數值
+        PIE2bits.CCP2IE = 1;
+        PIR2bits.CCP2IF = 0;
+        LATD += 1;
+    }
 }
 
 
@@ -54,7 +62,7 @@ void main(void){
     int count = 0;
     ur_main ();
     LATD = 0X01;
-//    configureCCP2ForCapture();
+    configureCCP2ForCapture();
     while(1){
         if(test == 1){
         pwm_init(4000.0, 4000.0);

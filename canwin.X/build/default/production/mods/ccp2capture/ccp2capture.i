@@ -9795,11 +9795,25 @@ unsigned char __t3rd16on(void);
 
 
 
+
 void configureCCP2ForCapture();
 # 3 "mods/ccp2capture/ccp2capture.c" 2
 
 
 void configureCCP2ForCapture() {
     PIR2bits.TMR3IF = 0;
-# 20 "mods/ccp2capture/ccp2capture.c"
+
+    CCP2CON = 0x04;
+    ANSELC &= ~(1 << 1);
+    TRISC |= 0b00000010;
+
+    PIE2bits.CCP2IE = 1;
+    CONFIG3H &= 0b11111110;
+
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    CCPTMRS0 = (CCPTMRS0 & 0b11100111) | 00001000;
+    T3CONbits.TMR3ON = 1;
+    T3CONbits.TMR3CS = 0;
+    T3CONbits.T3CKPS = 0b01;
 }

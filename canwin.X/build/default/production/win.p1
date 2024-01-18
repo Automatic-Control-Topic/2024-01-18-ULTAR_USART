@@ -14,8 +14,45 @@ Version 4.0 HI-TECH Software Intermediate Code
 "12 ./mods/ur/ur.h
 [; ;./mods/ur/ur.h: 12: extern struct Flag FLAGbits;
 [v _FLAGbits `S853 ~T0 @X0 0 e ]
-[t T2 __interrupt ]
-"9497 C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h
+"9737 C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9737:     struct {
+[s S451 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S451 . CCP2IF TMR3IF HLVDIF BCL1IF EEIF C2IF C1IF OSCFIF ]
+"9747
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9747:     struct {
+[s S452 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S452 . . LVDIF BCLIF ]
+"9752
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9752:     struct {
+[s S453 :6 `uc 1 :1 `uc 1 ]
+[n S453 . . CMIF ]
+"9736
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9736: typedef union {
+[u S450 `S451 1 `S452 1 `S453 1 ]
+[n S450 . . . . ]
+"9757
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9757: extern volatile PIR2bits_t PIR2bits __attribute__((address(0xFA1)));
+[v _PIR2bits `VS450 ~T0 @X0 0 e@4001 ]
+"9651
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9651:     struct {
+[s S447 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S447 . CCP2IE TMR3IE HLVDIE BCL1IE EEIE C2IE C1IE OSCFIE ]
+"9661
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9661:     struct {
+[s S448 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S448 . . LVDIE BCLIE ]
+"9666
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9666:     struct {
+[s S449 :6 `uc 1 :1 `uc 1 ]
+[n S449 . . CMIE ]
+"9650
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9650: typedef union {
+[u S446 `S447 1 `S448 1 `S449 1 ]
+[n S446 . . . . ]
+"9671
+[; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9671: extern volatile PIE2bits_t PIE2bits __attribute__((address(0xFA0)));
+[v _PIE2bits `VS446 ~T0 @X0 0 e@4000 ]
+"9497
 [; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 9497:     struct {
 [s S441 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S441 . TMR1IF TMR2IF CCP1IF SSP1IF TX1IF RC1IF ADIF ]
@@ -33,6 +70,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "11176
 [; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 11176: extern volatile unsigned char TXREG1 __attribute__((address(0xFAD)));
 [v _TXREG1 `Vuc ~T0 @X0 0 e@4013 ]
+[t T2 __interrupt ]
 "15774
 [; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic18f45k22.h: 15774: extern volatile unsigned char TMR1H __attribute__((address(0xFCF)));
 [v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
@@ -52,6 +90,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "4 ./mods/ur/ur.h
 [; ;./mods/ur/ur.h: 4: void ur_main ();
 [v _ur_main `(v ~T0 @X0 0 e? ]
+"5 ./mods/ccp2capture/ccp2capture.h
+[; ;./mods/ccp2capture/ccp2capture.h: 5: void configureCCP2ForCapture();
+[v _configureCCP2ForCapture `(v ~T0 @X0 0 e? ]
 "5 ./mods/pwm/pwm.h
 [; ;./mods/pwm/pwm.h: 5: void delay_ms(unsigned long A);
 [v _delay_ms `(v ~T0 @X0 0 ef1`ul ]
@@ -864,6 +905,36 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> _RX_TEMP `ui -> 98 `ui 858  ]
 [e = _test -> -> 0 `i `ui ]
 [e :U 858 ]
+"22
+[; ;win.c: 22:     if (PIR2bits.CCP2IF == 1) {
+[e $ ! == -> . . _PIR2bits 0 0 `i -> 1 `i 859  ]
+{
+"23
+[; ;win.c: 23:         PIE2bits.CCP2IE = 0;
+[e = . . _PIE2bits 0 0 -> -> 0 `i `uc ]
+"26
+[; ;win.c: 26:         while(PIR1bits.TX1IF==0);
+[e $U 860  ]
+[e :U 861 ]
+[e :U 860 ]
+[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 861  ]
+[e :U 862 ]
+"27
+[; ;win.c: 27:             TXREG1 = 0x31;
+[e = _TXREG1 -> -> 49 `i `uc ]
+"28
+[; ;win.c: 28:         PIE2bits.CCP2IE = 1;
+[e = . . _PIE2bits 0 0 -> -> 1 `i `uc ]
+"29
+[; ;win.c: 29:         PIR2bits.CCP2IF = 0;
+[e = . . _PIR2bits 0 0 -> -> 0 `i `uc ]
+"30
+[; ;win.c: 30:         LATD += 1;
+[e =+ _LATD -> -> 1 `i `Vuc ]
+"31
+[; ;win.c: 31:     }
+}
+[e :U 859 ]
 "32
 [; ;win.c: 32:     LATD = (LATD & 0b01111111) | 00000000;
 [e = _LATD -> | & -> _LATD `i -> 127 `i -> 0 `i `uc ]
@@ -881,158 +952,181 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _HighISR ]
 [f ]
 "39
-[; ;win.c: 39:     while(PIR1bits.TX1IF==0);
-[e $U 860  ]
-[e :U 861 ]
-[e :U 860 ]
-[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 861  ]
-[e :U 862 ]
-"40
-[; ;win.c: 40:             TXREG1 = 0x32;
-[e = _TXREG1 -> -> 50 `i `uc ]
-"41
-[; ;win.c: 41:     LATD = (LATD & 0b10111111) | 01000000;
+[; ;win.c: 39:     LATD = (LATD & 0b10111111) | 01000000;
 [e = _LATD -> | -> & -> _LATD `i -> 191 `i `l -> 262144 `l `uc ]
-"42
-[; ;win.c: 42:  PIR1bits.TMR1IF = 0;
+"40
+[; ;win.c: 40:  PIR1bits.TMR1IF = 0;
 [e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-"43
-[; ;win.c: 43:  TMR1H=0x80;
+"41
+[; ;win.c: 41:  TMR1H=0x80;
 [e = _TMR1H -> -> 128 `i `uc ]
-"44
-[; ;win.c: 44:     TMR1L=0x00;
+"42
+[; ;win.c: 42:     TMR1L=0x00;
 [e = _TMR1L -> -> 0 `i `uc ]
-"45
-[; ;win.c: 45:  FLAGbits.One_S=1;
+"43
+[; ;win.c: 43:  FLAGbits.One_S=1;
 [e = . _FLAGbits 0 -> -> 1 `i `uc ]
-"46
-[; ;win.c: 46:     LATD = (LATD & 0b10111111) | 00000000;
+"44
+[; ;win.c: 44:     LATD = (LATD & 0b10111111) | 00000000;
 [e = _LATD -> | & -> _LATD `i -> 191 `i -> 0 `i `uc ]
-"47
-[; ;win.c: 47: }
-[e :UE 859 ]
+"45
+[; ;win.c: 45:     if (PIR2bits.CCP2IF) {
+[e $ ! != -> . . _PIR2bits 0 0 `i -> 0 `i 864  ]
+{
+"46
+[; ;win.c: 46:         PIE2bits.CCP2IE = 0;
+[e = . . _PIE2bits 0 0 -> -> 0 `i `uc ]
+"49
+[; ;win.c: 49:         while(PIR1bits.TX1IF==0);
+[e $U 865  ]
+[e :U 866 ]
+[e :U 865 ]
+[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 866  ]
+[e :U 867 ]
+"50
+[; ;win.c: 50:             TXREG1 = 0x31;
+[e = _TXREG1 -> -> 49 `i `uc ]
+"51
+[; ;win.c: 51:         PIE2bits.CCP2IE = 1;
+[e = . . _PIE2bits 0 0 -> -> 1 `i `uc ]
+"52
+[; ;win.c: 52:         PIR2bits.CCP2IF = 0;
+[e = . . _PIR2bits 0 0 -> -> 0 `i `uc ]
+"53
+[; ;win.c: 53:         LATD += 1;
+[e =+ _LATD -> -> 1 `i `Vuc ]
+"54
+[; ;win.c: 54:     }
+}
+[e :U 864 ]
+"55
+[; ;win.c: 55: }
+[e :UE 863 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"50
-[; ;win.c: 50: void main(void){
+"58
+[; ;win.c: 58: void main(void){
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"51
-[; ;win.c: 51:     init_main();
-[e ( _init_main ..  ]
-"52
-[; ;win.c: 52:     myFunction();
-[e ( _myFunction ..  ]
-"53
-[; ;win.c: 53:     pwm_init(4000.0, 4000.0);
-[e ( _pwm_init , .4000.0 .4000.0 ]
-"54
-[; ;win.c: 54:     int count = 0;
-[v _count `i ~T0 @X0 1 a ]
-[e = _count -> 0 `i ]
-"55
-[; ;win.c: 55:     ur_main ();
-[e ( _ur_main ..  ]
-"56
-[; ;win.c: 56:     LATD = 0X01;
-[e = _LATD -> -> 1 `i `uc ]
-"58
-[; ;win.c: 58:     while(1){
-[e :U 865 ]
-{
 "59
-[; ;win.c: 59:         if(test == 1){
-[e $ ! == _test -> -> 1 `i `ui 867  ]
-{
+[; ;win.c: 59:     init_main();
+[e ( _init_main ..  ]
 "60
-[; ;win.c: 60:         pwm_init(4000.0, 4000.0);
+[; ;win.c: 60:     myFunction();
+[e ( _myFunction ..  ]
+"61
+[; ;win.c: 61:     pwm_init(4000.0, 4000.0);
 [e ( _pwm_init , .4000.0 .4000.0 ]
 "62
-[; ;win.c: 62:     }
-}
-[e $U 868  ]
+[; ;win.c: 62:     int count = 0;
+[v _count `i ~T0 @X0 1 a ]
+[e = _count -> 0 `i ]
 "63
-[; ;win.c: 63:     else{
-[e :U 867 ]
-{
+[; ;win.c: 63:     ur_main ();
+[e ( _ur_main ..  ]
+"64
+[; ;win.c: 64:     LATD = 0X01;
+[e = _LATD -> -> 1 `i `uc ]
 "65
-[; ;win.c: 65:         pwm_init(10000.0, 5000.0);
-[e ( _pwm_init , .10000.0 .5000.0 ]
+[; ;win.c: 65:     configureCCP2ForCapture();
+[e ( _configureCCP2ForCapture ..  ]
 "66
-[; ;win.c: 66:         delay_ms(1);
-[e ( _delay_ms (1 -> -> -> 1 `i `l `ul ]
-"67
-[; ;win.c: 67:         pwm_init(4000.0, 4000.0);
-[e ( _pwm_init , .4000.0 .4000.0 ]
-"68
-[; ;win.c: 68:         test = 1;
-[e = _test -> -> 1 `i `ui ]
-"69
-[; ;win.c: 69:     }
-}
-[e :U 868 ]
-"70
-[; ;win.c: 70:         if(FLAGbits.TxD!=1){
-[e $ ! != -> . _FLAGbits 1 `i -> 1 `i 869  ]
-{
-"71
-[; ;win.c: 71:   if(FLAGbits.One_S==1) {
-[e $ ! == -> . _FLAGbits 0 `i -> 1 `i 870  ]
-{
-"72
-[; ;win.c: 72:    FLAGbits.One_S=0;
-[e = . _FLAGbits 0 -> -> 0 `i `uc ]
-"73
-[; ;win.c: 73:    while(PIR1bits.TX1IF==0);
-[e $U 871  ]
-[e :U 872 ]
-[e :U 871 ]
-[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 872  ]
-[e :U 873 ]
-"74
-[; ;win.c: 74:             TXREG1 = 0x30;
-[e = _TXREG1 -> -> 48 `i `uc ]
-"75
-[; ;win.c: 75:             __nop();
-[e ( ___nop ..  ]
-"76
-[; ;win.c: 76:    while(PIR1bits.TX1IF==0);
-[e $U 874  ]
-[e :U 875 ]
-[e :U 874 ]
-[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 875  ]
-[e :U 876 ]
-"77
-[; ;win.c: 77:    TXREG1 = 0x0A;
-[e = _TXREG1 -> -> 10 `i `uc ]
-"78
-[; ;win.c: 78:             __nop();
-[e ( ___nop ..  ]
-"79
-[; ;win.c: 79:             while(PIR1bits.TX1IF==0);
-[e $U 877  ]
-[e :U 878 ]
-[e :U 877 ]
-[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 878  ]
-[e :U 879 ]
-"80
-[; ;win.c: 80:             TXREG1 = 0x0D;
-[e = _TXREG1 -> -> 13 `i `uc ]
-"82
-[; ;win.c: 82:         }}
-}
+[; ;win.c: 66:     while(1){
 [e :U 870 ]
+{
+"67
+[; ;win.c: 67:         if(test == 1){
+[e $ ! == _test -> -> 1 `i `ui 872  ]
+{
+"68
+[; ;win.c: 68:         pwm_init(4000.0, 4000.0);
+[e ( _pwm_init , .4000.0 .4000.0 ]
+"70
+[; ;win.c: 70:     }
+}
+[e $U 873  ]
+"71
+[; ;win.c: 71:     else{
+[e :U 872 ]
+{
+"73
+[; ;win.c: 73:         pwm_init(10000.0, 5000.0);
+[e ( _pwm_init , .10000.0 .5000.0 ]
+"74
+[; ;win.c: 74:         delay_ms(1);
+[e ( _delay_ms (1 -> -> -> 1 `i `l `ul ]
+"75
+[; ;win.c: 75:         pwm_init(4000.0, 4000.0);
+[e ( _pwm_init , .4000.0 .4000.0 ]
+"76
+[; ;win.c: 76:         test = 1;
+[e = _test -> -> 1 `i `ui ]
+"77
+[; ;win.c: 77:     }
+}
+[e :U 873 ]
+"78
+[; ;win.c: 78:         if(FLAGbits.TxD!=1){
+[e $ ! != -> . _FLAGbits 1 `i -> 1 `i 874  ]
+{
+"79
+[; ;win.c: 79:   if(FLAGbits.One_S==1) {
+[e $ ! == -> . _FLAGbits 0 `i -> 1 `i 875  ]
+{
+"80
+[; ;win.c: 80:    FLAGbits.One_S=0;
+[e = . _FLAGbits 0 -> -> 0 `i `uc ]
+"81
+[; ;win.c: 81:    while(PIR1bits.TX1IF==0);
+[e $U 876  ]
+[e :U 877 ]
+[e :U 876 ]
+[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 877  ]
+[e :U 878 ]
+"82
+[; ;win.c: 82:             TXREG1 = 0x30;
+[e = _TXREG1 -> -> 48 `i `uc ]
+"83
+[; ;win.c: 83:             __nop();
+[e ( ___nop ..  ]
+"84
+[; ;win.c: 84:    while(PIR1bits.TX1IF==0);
+[e $U 879  ]
+[e :U 880 ]
+[e :U 879 ]
+[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 880  ]
+[e :U 881 ]
+"85
+[; ;win.c: 85:    TXREG1 = 0x0A;
+[e = _TXREG1 -> -> 10 `i `uc ]
+"86
+[; ;win.c: 86:             __nop();
+[e ( ___nop ..  ]
+"87
+[; ;win.c: 87:             while(PIR1bits.TX1IF==0);
+[e $U 882  ]
+[e :U 883 ]
+[e :U 882 ]
+[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 883  ]
+[e :U 884 ]
+"88
+[; ;win.c: 88:             TXREG1 = 0x0D;
+[e = _TXREG1 -> -> 13 `i `uc ]
+"90
+[; ;win.c: 90:         }}
+}
+[e :U 875 ]
+}
+[e :U 874 ]
+"92
+[; ;win.c: 92: }
 }
 [e :U 869 ]
-"84
-[; ;win.c: 84: }
-}
-[e :U 864 ]
-[e $U 865  ]
-[e :U 866 ]
-"85
-[; ;win.c: 85: }
-[e :UE 863 ]
+[e $U 870  ]
+[e :U 871 ]
+"93
+[; ;win.c: 93: }
+[e :UE 868 ]
 }

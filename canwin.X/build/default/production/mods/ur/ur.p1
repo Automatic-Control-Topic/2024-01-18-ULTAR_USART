@@ -1024,8 +1024,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _Init_TMR1 ]
 [f ]
 "106
-[; ;mods/ur/ur.c: 106:   T1CON =0b10001111;
-[e = _T1CON -> -> 143 `i `uc ]
+[; ;mods/ur/ur.c: 106:   T1CON =0b01001111;
+[e = _T1CON -> -> 79 `i `uc ]
 "108
 [; ;mods/ur/ur.c: 108:   TMR1H = 0x80;
 [e = _TMR1H -> -> 128 `i `uc ]

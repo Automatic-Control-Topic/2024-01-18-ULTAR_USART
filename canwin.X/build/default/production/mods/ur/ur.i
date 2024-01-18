@@ -9856,7 +9856,7 @@ void ur_main () {
 # 104 "mods/ur/ur.c"
 void Init_TMR1 (void){
 
-  T1CON =0b10001111;
+  T1CON =0b01001111;
 
   TMR1H = 0x80;
   TMR1L = 0x00;

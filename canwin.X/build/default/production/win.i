@@ -10211,6 +10211,7 @@ void delay_ms(unsigned long A);
 
 
 
+
 void configureCCP2ForCapture();
 # 12 "win.c" 2
 
@@ -10223,7 +10224,16 @@ void __attribute__((picinterrupt(("low_priority")))) LowISR(void)
  if(RX_TEMP=='p') FLAGbits.TxD=1;
     if(RX_TEMP=='a') test = 1;
     if(RX_TEMP=='b') test = 0;
-# 32 "win.c"
+    if (PIR2bits.CCP2IF == 1) {
+        PIE2bits.CCP2IE = 0;
+
+
+        while(PIR1bits.TX1IF==0);
+            TXREG1 = 0x31;
+        PIE2bits.CCP2IE = 1;
+        PIR2bits.CCP2IF = 0;
+        LATD += 1;
+    }
     LATD = (LATD & 0b01111111) | 00000000;
 }
 
@@ -10231,14 +10241,22 @@ void __attribute__((picinterrupt(("low_priority")))) LowISR(void)
 
 void __attribute__((picinterrupt(("")))) HighISR(void)
 {
-    while(PIR1bits.TX1IF==0);
-            TXREG1 = 0x32;
     LATD = (LATD & 0b10111111) | 01000000;
  PIR1bits.TMR1IF = 0;
  TMR1H=0x80;
     TMR1L=0x00;
  FLAGbits.One_S=1;
     LATD = (LATD & 0b10111111) | 00000000;
+    if (PIR2bits.CCP2IF) {
+        PIE2bits.CCP2IE = 0;
+
+
+        while(PIR1bits.TX1IF==0);
+            TXREG1 = 0x31;
+        PIE2bits.CCP2IE = 1;
+        PIR2bits.CCP2IF = 0;
+        LATD += 1;
+    }
 }
 
 
@@ -10249,7 +10267,7 @@ void main(void){
     int count = 0;
     ur_main ();
     LATD = 0X01;
-
+    configureCCP2ForCapture();
     while(1){
         if(test == 1){
         pwm_init(4000.0, 4000.0);

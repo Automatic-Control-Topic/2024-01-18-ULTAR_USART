@@ -103,7 +103,7 @@ void ur_main () {
 // 初始化TIMER1
 void Init_TMR1 (void){
   // 16位元模式、1倍前除器、非同步計數模式、使用外部震盪器，開啟計時器 
-  T1CON =0b10001111;
+  T1CON =0b01001111;
   // Gate Control 沒有用到可以忽略而用預設值
   TMR1H = 0x80;  // 寫入預設值
   TMR1L = 0x00;
